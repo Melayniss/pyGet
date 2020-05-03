@@ -6,6 +6,8 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-class TestdbPipeline(object):
+class DbPipeline(object):
     def process_item(self, item, spider):
         return item
+
+# Need to make the pipeline class name relate to the spider.
