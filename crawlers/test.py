@@ -8,7 +8,7 @@ def getHTTP(url):
     try:
         r = requests.get(url, headers=headers)
         r.raise_for_status()
-        # r.encoding = r.apparent_encoding
+        r.encoding = r.apparent_encoding
         # 当采用beautiful soup库时，其判断当前文本的编码方式与实际编码方式不同
         # 一个是在HTTP过程中的utf-8，一个是在windows下的编码格式
         return r.text
@@ -16,18 +16,22 @@ def getHTTP(url):
     except:
         if r.status_code == 418:
             return "I'm a teapot"
-        return "Error"
+        else:
+            return "Error"
 
 
 if __name__ == "__main__":
-    url = "http://douban.com/robots.txt"
+    url = "https://movie.douban.com/top250"
     demo = getHTTP(url)
-    # soup = BeautifulSoup(demo, "html.parser")
+    soup = BeautifulSoup(demo, "html.parser")
+    soup.prettify()
+
     # print(soup.prettify())
-    print(demo)
+    # print(demo)
 
 # print(r.status_code)
 # r.encoding = 'utf-8'
 # print(r.text)
 # print(type(r))
 # print(r.headers)
+
